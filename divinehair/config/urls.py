@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("autenticacao/", include("autenticacao.urls")),  # Adicionando a autenticação
     path("", include("core.urls")),  # Adicionando a página principal
+    path('auth/', include('autenticacao.urls')),
 ]
