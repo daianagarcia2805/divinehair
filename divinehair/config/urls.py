@@ -15,8 +15,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  # Importando 'include' para adicionar mais URLs
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("autenticacao/", include("autenticacao.urls")),  # Adicionando a autenticação
+    path("", include("core.urls")),  # Adicionando a página principal
 ]
