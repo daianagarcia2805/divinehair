@@ -34,14 +34,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-"django.contrib.admin",
-"django.contrib.auth",
-"django.contrib.contenttypes",
-"django.contrib.sessions",
-"django.contrib.messages",
-"django.contrib.staticfiles",
-"autenticacao",
-"core",
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'autenticacao',  
+'core',  
 "cadastros",
 ]
 
@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "config.urls"
 
 #integra com o sistema de auth padrao do Django
-AUTH_USER_MODEL = 'cadastros.Usuario' 
+AUTH_USER_MODEL = 'cadastros.Usuario'
 AUTHENTICATION_BACKENDS = [
     #'cadastros.backends.EmailBackend',  #backend de autenticacao personalizado
     'django.contrib.auth.backends.ModelBackend',  #backend de autenticacao padrao
@@ -69,8 +69,8 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "resources")], #define o caminho da pasta que tera os recursos usados pelos templates
-        "APP_DIRS": True,
+        "DIRS": [],  # Não precisa adicionar diretórios aqui, pois APP_DIRS está ativado
+        "APP_DIRS": True,  # Django vai procurar templates nas pastas das apps
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",

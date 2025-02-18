@@ -42,7 +42,7 @@ class Usuario(AbstractBaseUser):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    perfis = models.ManyToManyField(Perfil)
+    perfis = models.ManyToManyField(Perfil, related_name='usuarios')
 
     objects = UsuarioManager()
 
@@ -105,3 +105,4 @@ class AlteracaoSenha(models.Model):
 
     def __str__(self):
         return f"{self.usuario.nome} - Alteração de senha em {self.data_hora}"
+
