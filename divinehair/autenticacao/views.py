@@ -31,7 +31,7 @@ def logout_view(request):
 
 @perfil_required('admin')
 def admin_dashboard(request):
-    return render(request, 'admin_dashboard.html')
+    return render(request, 'autenticacao/admin_dashboard.html')
 
 @perfil_required('funcionario')
 def funcionario_dashboard(request):
@@ -40,15 +40,3 @@ def funcionario_dashboard(request):
 @perfil_required('cliente')
 def cliente_dashboard(request):
     return render(request, 'autenticacao/cliente_dashboard.html')
-
-@perfil_required('Admin')
-def admin_dashboard(request):
-    return render(request, 'autenticacao/admin_dashboard.html')
-
-
-
-
-
-
-
-

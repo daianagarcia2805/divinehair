@@ -65,12 +65,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  #backend de autenticacao padrao
 ]
 
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],  # Não precisa adicionar diretórios aqui, pois APP_DIRS está ativado
-        "APP_DIRS": True,  # Django vai procurar templates nas pastas das apps
+        "DIRS": [BASE_DIR / "core" / "templates" / "core"],  # Ajuste para incluir o subdiretório core
+        "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -81,7 +80,6 @@ TEMPLATES = [
         },
     },
 ]
-
 #URL de redirecionamento apos login
 LOGIN_REDIRECT_URL = 'core:main'
 LOGOUT_REDIRECT_URL = 'autenticacao:login'
