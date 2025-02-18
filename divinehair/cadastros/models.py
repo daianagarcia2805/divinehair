@@ -43,6 +43,7 @@ class Usuario(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     perfis = models.ManyToManyField(Perfil, related_name='usuarios')
+    servicos = models.ManyToManyField('Servico', related_name='funcionarios', blank=True)  # Novo campo
 
     objects = UsuarioManager()
 
