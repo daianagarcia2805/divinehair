@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Funcionário</title>
-</head>
-<body>
-    <h1>Bem-vindo, Funcionário!</h1>
-    <p>Esta é a página do dashboard de funcionário.</p>
-    <a href="{% url 'autenticacao:alterar_senha' %}">Alterar Senha</a>  <!-- Link para alterar a senha -->
-</body>
-</html>
+{% extends "core/base.html" %}
+
+{% block content %}
+  <h1>Bem-vindo, {{ user.nome }}</h1>
+
+  <h2>Seus Agendamentos</h2>
+  <a href="{% url 'cadastros:cria_agendamento' %}">Novo Agendamento</a>
+
+  {% if agendamentos %}
+    <table>
+      <tr>
+        <th>Serviço</th>
+        <th>Data e Hora</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+      {% for agendamento in agendamentos %}
+        <tr>
+          <td>{{ agendamento.servico.nome }}</td>
+          <td>{{ agendamento.data_hora }}</td>
+          <td>{{ agendamento.status }}</td>
+          <td>
+            <a href="{% url 'cadastros:edita_agendamento' agendamento.pk %}">Editar</a>
+            <a href="{% url 'cadastros:deleta_agendamento' agendamento.pk %}">Cancelar</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>Você não tem agendamentos.</p>
+  {% endif %}
+{% endblock %}

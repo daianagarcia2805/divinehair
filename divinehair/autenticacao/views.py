@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CustomLoginForm
 from .decorators import perfil_required
+from cadastros.models import Agendamento
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     if request.method == 'POST':
@@ -39,4 +41,5 @@ def funcionario_dashboard(request):
 
 @perfil_required('cliente')
 def cliente_dashboard(request):
-    return render(request, 'autenticacao/cliente_dashboard.html')
+    agendamentos = Agendamento.objects.filter(usuario=request.user)
+    return render(request, 'autenticacao/cliente_dashboard.html', {'agendamentos': agendamentos})

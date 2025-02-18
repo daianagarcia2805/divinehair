@@ -20,4 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),  # URL para acessar o Django Admin
     path("autenticacao/", include("autenticacao.urls")),  # URL para a autenticação (se houver um app 'autenticacao')
     path("", include("core.urls")),  # URL para a página principal (se houver um app 'core')
+    path('cadastros/', include('cadastros.urls', namespace='cadastros')), 
 ]
