@@ -12,4 +12,9 @@ urlpatterns = [
     path('servicos/criar/', views.criar_servico, name='criar_servico'),
     path('servicos/editar/<int:pk>/', views.editar_servico, name='editar_servico'),
     path('servicos/deletar/<int:pk>/', views.deletar_servico, name='deletar_servico'),
+    path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
+    path('usuarios/criar/', views.criar_usuario, name='criar_usuario'),
+    path('usuarios/editar/<int:pk>/', views.editar_usuario, name='editar_usuario'),
+    path('usuarios/excluir/<int:pk>/', views.excluir_usuario, name='excluir_usuario'),
+
 ]

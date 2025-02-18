@@ -4,7 +4,12 @@ from .forms import AgendamentoForm
 from django.contrib.auth.decorators import login_required
 from .models import Servico
 from .forms import ServicoForm
-
+from .models import Usuario
+from .forms import UsuarioForm
+from .forms import PerfilForm
+from django.contrib import messages  # Importar o sistema de mensagens
+from .models import Usuario
+from .forms import UsuarioForm
 
 @login_required
 def lista_agendamentos(request):
@@ -83,3 +88,41 @@ def deletar_servico(request, pk):
         return redirect('cadastros:listar_servicos')  # Corrigido para 'listar_servicos'
     
     return render(request, 'servicos/confirm_deletar_servico.html', {'servico': servico})
+
+
+# View para listar os usuários
+def listar_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, 'usuarios/listar_usuarios.html', {'usuarios': usuarios})
+
+def criar_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Usuário cadastrado com sucesso!')
+            return redirect('cadastros:listar_usuarios')
+    else:
+        form = UsuarioForm()
+    return render(request, 'usuarios/criar_usuario.html', {'form': form})
+
+def editar_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            # Adicionar uma mensagem de sucesso
+            messages.success(request, 'Usuário alterado com sucesso!')
+            return redirect('cadastros:listar_usuarios')
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, 'usuarios/editar_usuario.html', {'form': form, 'usuario': usuario})
+
+# View para excluir um usuário
+def excluir_usuario(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('cadastros:listar_usuarios')  # Certifique-se de que o nome está correto
+    return render(request, 'usuarios/excluir_usuario.html', {'usuario': usuario})

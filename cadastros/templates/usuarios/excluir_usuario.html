@@ -1,0 +1,11 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h1>Excluir Usuário: {{ usuario.nome }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Tem certeza que deseja excluir este usuário?</p>
+        <button type="submit">Excluir</button>
+    </form>
+{% endblock %}
+
