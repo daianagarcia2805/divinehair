@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Senha Alterada com Sucesso!</h2>
+    <p>Sua senha foi alterada com sucesso.</p>
+    <a href="{% url 'autenticacao:login' %}" class="btn btn-success">Fazer Login</a>
+</div>
+{% endblock %}

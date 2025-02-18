@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<h1>Lista de Serviços</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for servico in servicos %}
+            <tr>
+                <td>{{ servico.nome }}</td>
+                <td>{{ servico.descricao }}</td>
+                <td>{{ servico.preco }}</td>
+                <td>
+                    <a href="{% url 'cadastros:editar_servico' servico.pk %}">Editar</a>
+                    <a href="{% url 'cadastros:deletar_servico' servico.pk %}">Excluir</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'cadastros:criar_servico' %}">Criar Novo Serviço</a>
+
+{% endblock %}

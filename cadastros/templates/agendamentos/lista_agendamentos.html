@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+  <h1>Agendamentos</h1>
+  <a href="{% url 'cadastros:cria_agendamento' %}">Criar novo agendamento</a>
+  <table>
+    <tr>
+      <th>Usuário</th>
+      <th>Serviço</th>
+      <th>Data e Hora</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+    {% for agendamento in agendamentos %}
+      <tr>
+        <td>{{ agendamento.usuario.nome }}</td>
+        <td>{{ agendamento.servico.nome }}</td>
+        <td>{{ agendamento.data_hora }}</td>
+        <td>{{ agendamento.status }}</td>
+        <td>
+          <a href="{% url 'cadastros:edita_agendamento' agendamento.pk %}">Editar</a>
+          <a href="{% url 'cadastros:deleta_agendamento' agendamento.pk %}">Excluir</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
