@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.deletion import ProtectedError
-import datetime # * trabalhar com datas e horas em Python
+import datetime 
 
 
-# Tabela de Perfis de Usuários (Admin, Funcionário, Cliente)
+# tabela de Perfis de Usuários (Admin, Funcionário, Cliente)
 class Perfil(models.Model):
     nome = models.CharField(max_length=100, unique=True)
 
@@ -20,7 +20,7 @@ class Perfil(models.Model):
         return self.nome
 
 
-# Tabela de Usuários (clientes, funcionários, administradores)
+# tabela de Usuários (clientes, funcionários, administradores)
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome, password=None):
         if not email:
@@ -67,7 +67,7 @@ class Usuario(AbstractBaseUser):
         return self.perfis.filter(nome=perfil_nome).exists()
 
 
-# Tabela de Serviços oferecidos no salão de beleza
+# tabela de Serviços oferecidos no salão de beleza
 class Servico(models.Model):
     nome = models.CharField(max_length=200)
     descricao = models.TextField()
@@ -77,7 +77,7 @@ class Servico(models.Model):
         return self.nome
 
 
-# Tabela de Agendamentos
+# tabela de Agendamentos
 class Agendamento(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE)
@@ -88,7 +88,7 @@ class Agendamento(models.Model):
         return f"{self.usuario.nome} - {self.servico.nome} - {self.data_hora}"
 
 
-# Tabela de Log de Acesso (para auditoria e controle de segurança)
+# tabela de Log de Acesso (para auditoria e controle de segurança)
 class LogAcesso(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     data_hora = models.DateTimeField(auto_now_add=True)
@@ -98,7 +98,7 @@ class LogAcesso(models.Model):
         return f"{self.usuario.nome} - {self.acao} - {self.data_hora}"
 
 
-# Tabela de Alteração de Senha
+# tabela de Alteração de Senha
 class AlteracaoSenha(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     nova_senha = models.CharField(max_length=200)

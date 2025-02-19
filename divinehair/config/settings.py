@@ -19,8 +19,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
+# quick-start development settings - unsuitable for production
+# see https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-c0u^^n@h_h)j5!t8)-&01q@lq%2e3sywn#lt8ql_+f4jg0j(8g"
@@ -31,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# application definition
 
 INSTALLED_APPS = [
 'django.contrib.admin',
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 'core',  
 "cadastros",
 ]
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -68,7 +70,11 @@ AUTHENTICATION_BACKENDS = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "core" / "templates" / "core"],  # Ajuste para incluir o subdiretório core
+        "DIRS": [
+            BASE_DIR / "core" / "templates",            # Diretório de templates do core
+            BASE_DIR / "cadastros" / "templates",       # Diretório de templates de cadastros
+            BASE_DIR / "autenticacao" / "templates",    # Diretório de templates de autenticacao
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -80,16 +86,12 @@ TEMPLATES = [
         },
     },
 ]
-#URL de redirecionamento apos login
-LOGIN_REDIRECT_URL = 'core:main'
-LOGOUT_REDIRECT_URL = 'autenticacao:login'
-LOGIN_URL = 'autenticacao:login'
 
 
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-# Database
+# database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
@@ -102,7 +104,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-# Settings for messages
+# settings for messages
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',
@@ -114,7 +116,7 @@ MESSAGE_TAGS = {
 
 
 
-# Password validation
+# password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
+# internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "pt-BR"
@@ -145,7 +147,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
@@ -155,18 +157,18 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "resources/static/"),
+    os.path.join(BASE_DIR, "static"),  # diretório 'static' na raiz do projeto
 ]
 
-
-# Default primary key field type
+# default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-#Configurações de variáveis globais
+#configurações de variáveis globais
 NUMBER_GRID_PAGES = 20
 NUMBER_GRID_MODAL = 20
 
+
+LOGIN_URL = 'autenticacao:login'

@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <!-- exibir mensagens de sucesso ou erro -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p class="alert alert-success">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <h1>Lista de Usuários</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Perfil</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.perfil }}</td>
+                    <td>
+                        <a href="{% url 'cadastros:editar_usuario' usuario.pk %}">Editar</a>
+                        <a href="{% url 'cadastros:excluir_usuario' usuario.pk %}">Excluir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'cadastros:criar_usuario' %}">Criar Novo Usuário</a>
+
+{% endblock %}

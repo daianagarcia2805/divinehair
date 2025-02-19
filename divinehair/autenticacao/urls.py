@@ -5,18 +5,18 @@ from . import views
 app_name = "autenticacao"
 
 urlpatterns = [
-    # URL de login
+    # url de login
     path("login/", views.login_view, name="login"),
     
-    # URL de logout
+    # url de logout
     path("logout/", views.logout_view, name="logout"),
     
-    # URLs para diferentes dashboards
+    # urls para diferentes dashboards
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('funcionario/dashboard/', views.funcionario_dashboard, name='funcionario_dashboard'),
     path('cliente/dashboard/', views.cliente_dashboard, name='cliente_dashboard'),
     
-    # URL para alterar senha
+    # url para alterar senha
     path(
         'alterar_senha/',
         PasswordChangeView.as_view(
@@ -26,7 +26,7 @@ urlpatterns = [
         name='alterar_senha'
     ),
     
-    # URL após alteração de senha
+    # url após alteração de senha
     path(
         'senha_alterada/',
         PasswordChangeDoneView.as_view(template_name='autenticacao/senha_alterada.html'),

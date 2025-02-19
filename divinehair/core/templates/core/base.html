@@ -2,18 +2,119 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}DivineHair{% endblock %}</title>
+
+    <!-- carregar a tag 'static' -->
+    {% load static %}
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #f06292;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .img-fluid {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #f06292;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        /* hero section, ajustando o espaço para o título não se sobrepor à navbar */
+        .hero-section {
+            background-image: url('{% static "core/images/salon-background.png" %}');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            position: relative;
+            padding-top: 100px; /* garante que o título fique abaixo da navbar fixa */
+        }
+
+        /* estilo do título */
+        .hero-title {
+            color: white;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao DivineHair</h1>
-        <nav>
-            <a href="{% url 'autenticacao:alterar_senha' %}">Alterar Senha</a>
-        </nav>
-    </header>
-    
-    <main>
+
+    <!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'core:main' %}">
+            <img src="{% static 'core/images/imagem1.png' %}" alt="DivineHair" style="width: 120px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:main' %}">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cadastros:listar_servicos' %}">Serviços</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cadastros:lista_agendamentos' %}">Agendamentos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:contato' %}">Contato</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'autenticacao:logout' %}">Sair</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- hero Section (imagem de fundo) -->
+    <section class="hero-section">
+        <div class="hero-title">
+            <h1>Bem-vindo ao DivineHair</h1>
+        </div>
+    </section>
+
+    <!-- conteúdo principal -->
+    <main class="container mt-4">
+        <h2>Sobre o salão</h2>
+        <img src="{% static 'core/images/salon.png' %}" alt="Salão de Beleza" class="img-fluid">
         {% block content %}{% endblock %}
     </main>
+
+    <!-- rodapé -->
+    <footer class="text-center py-3">
+        <p>© 2025 DivineHair - Todos os direitos reservados</p>
+    </footer>
+
+    <!-- bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

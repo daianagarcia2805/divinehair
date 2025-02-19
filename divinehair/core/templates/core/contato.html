@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load static %}  
+
+{% block content %}
+<div class="container text-center">
+    <h2>Entre em Contato</h2>
+    <p>Se precisar de mais informações, entre em contato conosco.</p>
+    
+    <div class="address">
+        <p><strong>DivineHair - Beauty Salon</strong></p>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Starry Street, <br>Glamour District, <br>City of Lights, EX, 12345-678</p>
+        <p><i class="fas fa-phone-alt"></i> Phone: +55 (11) 98765-4321</p>
+        <p><i class="fas fa-envelope"></i> Email: <a href="mailto:contact@divinehair.com.br">contact@divinehair.com.br</a></p>
+    </div>
+
+    <img src="{% static 'core/images/contato.jpg' %}" alt="Imagem de Contato" class="img-fluid" width="600px">
+</div>
+{% endblock %}
